@@ -5,8 +5,8 @@
 <div>
   <table>
     <thead>
-      <tr>
-        <th #el1>
+      <tr #main>
+        <th #el1 style="width: 35%">
           <span>Id</span>
           <button class="line" (mousedown)="onResizeStart($event, 1)" (window:mouseup)="onResizeEnd($event)">c</button>
         </th>
@@ -14,7 +14,7 @@
           <span>Year</span>
           <button class="line" (mousedown)="onResizeStart($event, 2)" (window:mouseup)="onResizeEnd($event)">c</button>
         </th>
-        <th #el3>
+        <th #el3 style="width: 35%">
           <span>Brand</span>
         </th>
         

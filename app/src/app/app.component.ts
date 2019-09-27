@@ -10,6 +10,8 @@ export class AppComponent {
   mouseEnd = 0;
   isactive = false;
   
+  @ViewChildren('main')
+  main: QueryList<ElementRef>;
 
   @ViewChildren('el1')
   el1: QueryList<ElementRef>;
@@ -35,6 +37,7 @@ export class AppComponent {
   }
 
   onResizeEnd(event) {
+    
     if(this.isactive) {
       let difference = this.mouseEnd - this.mouseStart;
       this.isactive = false;
@@ -58,6 +61,13 @@ export class AppComponent {
             `${width}px`
           );
         });
+        this.el3.forEach((th, index) => {
+          this.renderer.setStyle(
+            th.nativeElement, 
+            'width', 
+            `${35}%`
+          );
+        });
       } else {
         let widths = this.el2.map(th => th.nativeElement.offsetWidth);
         widths =  difference + widths[0];
@@ -77,6 +87,13 @@ export class AppComponent {
             th.nativeElement, 
             'width', 
             `${width}px`
+          );
+        });
+        this.el1.forEach((th, index) => {
+          this.renderer.setStyle(
+            th.nativeElement, 
+            'width', 
+            `${35}%`
           );
         });
       }
