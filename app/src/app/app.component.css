@@ -1,0 +1,25 @@
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+h1{
+    text-align: center;
+}
+table, th, td{
+    border: solid black 2px;
+    margin: 0px;
+    padding: 0px;
+}
+td{
+    text-align: center;
+}
+.line{
+   width: 3%;
+   height: 100%;
+   margin-right: 0px;
+   position: relative;
+   float: right;
+   background-color: aqua;
+
+
+}
