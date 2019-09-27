@@ -60,7 +60,7 @@ export class AppComponent {
         });
       } else {
         let widths = this.el2.map(th => th.nativeElement.offsetWidth);
-        widths =  widths[0] + difference;
+        widths =  difference + widths[0];
         this.el2.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
@@ -70,13 +70,13 @@ export class AppComponent {
         });
         
         let width = this.el3.map(th => th.nativeElement.offsetWidth);
-        let swidth = widths[0] - difference;
+        width = [width[0] - difference];
         console.log(width)
-        this.el2.forEach((th, index) => {
+        this.el3.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${swidth}px`
+            `${width}px`
           );
         });
       }

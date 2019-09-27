@@ -5,6 +5,9 @@ table{
 h1{
     text-align: center;
 }
+th{
+    border-right: solid blue 10px;
+}
 table, th, td{
     border: solid black 2px;
     margin: 0px;
