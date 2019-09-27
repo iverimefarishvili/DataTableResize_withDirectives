@@ -36,64 +36,70 @@ export class AppComponent {
     this.isactive = true;
   }
 
+  
+
+  ngOnInit(): void {
+    
+  }
+
+  el1size:any;
+  el2size:any;
+  el3size:any;
+  
+
   onResizeEnd(event) {
+    this.el1size = this.el1.map(th => th.nativeElement.offsetWidth)[0];
+    this.el2size = this.el2.map(th => th.nativeElement.offsetWidth)[0];
+    this.el3size = this.el3.map(th => th.nativeElement.offsetWidth)[0];
     
     if(this.isactive) {
       let difference = this.mouseEnd - this.mouseStart;
       this.isactive = false;
 
       if(this.element == 1) {
-        let widths = this.el1.map(th => th.nativeElement.offsetWidth);
-        widths = difference + widths[0];
         this.el1.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${widths}px`
+            `${this.el1size + difference}px`
           );
         });
-        let width = this.el2.map(th => th.nativeElement.offsetWidth);
-        width = [width[0] - difference];
         this.el2.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${width}px`
+            `${this.el2size - difference}px`
           );
         });
         this.el3.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${35}%`
+            `${this.el3size}px`
           );
         });
       } else {
-        let widths = this.el2.map(th => th.nativeElement.offsetWidth);
-        widths =  difference + widths[0];
+        
+
         this.el2.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${widths}px`
+            `${this.el2size+difference}px`
           );
         });
-        
-        let width = this.el3.map(th => th.nativeElement.offsetWidth);
-        width = [width[0] - difference];
-        console.log(width)
         this.el3.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${width}px`
+            `${this.el3size - difference}px`
           );
         });
         this.el1.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
-            `${35}%`
+            `${this.el1size}px`
           );
         });
       }
