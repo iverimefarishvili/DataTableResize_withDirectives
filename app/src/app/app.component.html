@@ -8,16 +8,15 @@
       <tr>
         <th #el1>
           <span>Id</span>
-          <button class="line" (mousedown)="onResizeStart($event)" (window:mouseup)="onResizeEnd($event, 1)">c</button>
+          <button class="line" (mousedown)="onResizeStart($event, 1)" (window:mouseup)="onResizeEnd($event)">c</button>
         </th>
         <th #el2>
           <span>Year</span>
-          <button class="line" (mousedown)="onResizeStart($event)" (window:mouseup)="onResizeEnd($event, 2)">c</button>
+          <button class="line" (mousedown)="onResizeStart($event, 2)" (window:mouseup)="onResizeEnd($event)">c</button>
         </th>
         
-        <th #el3>
+        <th>
           <span>Brand</span>
-          <button class="line" (mousedown)="onResizeStart($event)" (window:mouseup)="onResizeEnd($event, 3)">c</button>
         </th>
         
       </tr>
