@@ -13,8 +13,11 @@ export class AppComponent {
   @ViewChildren('el1')
   el1: QueryList<ElementRef>;
 
-  @ViewChildren('targetTh')
+  @ViewChildren('el2')
   el2: QueryList<ElementRef>;
+
+  @ViewChildren('el3')
+  el3: QueryList<ElementRef>;
   
   constructor(private renderer: Renderer2) {};
 
@@ -28,7 +31,7 @@ export class AppComponent {
     this.isactive = true;
   }
 
-  onResizeEnd(event) {
+  onResizeEnd(event, element) {
     if(this.isactive) {
       let difference = this.mouseEnd - this.mouseStart;
       this.isactive = false;
