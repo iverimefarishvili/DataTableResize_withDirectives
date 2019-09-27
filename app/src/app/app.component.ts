@@ -16,6 +16,9 @@ export class AppComponent {
 
   @ViewChildren('el2')
   el2: QueryList<ElementRef>;
+
+  @ViewChildren('el3')
+  el3: QueryList<ElementRef>;
   
   constructor(private renderer: Renderer2) {};
 
@@ -46,14 +49,34 @@ export class AppComponent {
             `${widths}px`
           );
         });
+        let width = this.el2.map(th => th.nativeElement.offsetWidth);
+        width = [width[0] - difference];
+        this.el2.forEach((th, index) => {
+          this.renderer.setStyle(
+            th.nativeElement, 
+            'width', 
+            `${width}px`
+          );
+        });
       } else {
         let widths = this.el2.map(th => th.nativeElement.offsetWidth);
-        widths = difference + widths[0];
+        widths =  widths[0] + difference;
         this.el2.forEach((th, index) => {
           this.renderer.setStyle(
             th.nativeElement, 
             'width', 
             `${widths}px`
+          );
+        });
+        
+        let width = this.el3.map(th => th.nativeElement.offsetWidth);
+        let swidth = widths[0] - difference;
+        console.log(width)
+        this.el2.forEach((th, index) => {
+          this.renderer.setStyle(
+            th.nativeElement, 
+            'width', 
+            `${swidth}px`
           );
         });
       }
