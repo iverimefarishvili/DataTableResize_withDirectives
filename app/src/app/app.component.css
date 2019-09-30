@@ -1,12 +1,15 @@
 table{
     width: 100%;
     border-collapse: collapse;
+    position: relative;
+    height: 100%;
 }
 h1{
     text-align: center;
 }
 th{
     border-right: solid blue 10px;
+    
 }
 table, th, td{
     border: solid black 2px;
@@ -17,12 +20,22 @@ td{
     text-align: center;
 }
 .line{
-   width: 3%;
-   height: 100%;
-   margin-right: 0px;
-   position: relative;
+   width: 15px;
+   height: 24px;
+   display: inline-block;
+   vertical-align: top;
    float: right;
-   background-color: aqua;
-
-
+   cursor: ew-resize !important;
+}
+th{
+    text-align: center;
+    min-width: 100px;
+}
+.column{
+    height: 100%;
+    position: absolute;
+    display: none;
+    
+    border-left:solid 2px blue;
+    bottom: 0px;
 }

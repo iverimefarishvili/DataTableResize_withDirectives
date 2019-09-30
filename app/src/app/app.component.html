@@ -2,25 +2,26 @@
   <h1>Table Resize</h1>
 </div>
 
-<div>
+<div class="container">
   <table>
     <thead>
       <tr #main>
         <th #el1 style="width: 35%">
           <span>Id</span>
-          <button class="line" (mousedown)="onResizeStart($event, 1)" (window:mouseup)="onResizeEnd($event)">c</button>
+          <button class="line" (mousedown)="onResizeStart($event, 1)" (window:mouseup)="onResizeEnd($event)"></button>
         </th>
         <th #el2>
           <span>Year</span>
-          <button class="line" (mousedown)="onResizeStart($event, 2)" (window:mouseup)="onResizeEnd($event)">c</button>
+          <button class="line" (mousedown)="onResizeStart($event, 2)" (window:mouseup)="onResizeEnd($event)"></button>
         </th>
-        <th #el3 style="width: 35%">
+        <th #el3 >
           <span>Brand</span>
         </th>
         
       </tr>
     </thead>
     <tbody>
+      <div class="column" #column>hey</div>
       <tr>
         <td>
             <span>Color</span>
