@@ -39,3 +39,13 @@ th{
     border-left:solid 2px blue;
     bottom: 0px;
 }
+.click{
+    background-color: rgb(42, 46, 46);
+}
+
+.up{
+    content:url("https://img.icons8.com/windows/32/000000/sort-up.png");
+}
+.down{
+    content:url("https://img.icons8.com/windows/32/000000/sort-down.png");
+}

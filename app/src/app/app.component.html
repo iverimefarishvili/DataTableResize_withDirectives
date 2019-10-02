@@ -7,65 +7,38 @@
     <thead>
       <tr #main>
         <th #el1 style="width: 35%">
-          <span>Id</span>
+          <span>Year</span>
+          
+          <img (click)="sortbyyear(el1)" [ngClass]="el1.issort ? 'down' : 'up'"  src="https://img.icons8.com/windows/32/000000/sort.png">
+          
           <button class="line" (mousedown)="onResizeStart($event, 1)" (window:mouseup)="onResizeEnd($event)"></button>
         </th>
         <th #el2>
-          <span>Year</span>
+          <span>Model</span>
+          <img (click)="sortbymodel(el2)" [ngClass]="el2.issort ? 'down' : 'up'" src="https://img.icons8.com/windows/32/000000/sort.png">
           <button class="line" (mousedown)="onResizeStart($event, 2)" (window:mouseup)="onResizeEnd($event)"></button>
         </th>
         <th #el3 >
-          <span>Brand</span>
+          <span>Color</span>
+          <img (click)="sortbycolor(el3)" [ngClass]="el3.issort ? 'down' : 'up'" src="https://img.icons8.com/windows/32/000000/sort.png">
         </th>
         
       </tr>
     </thead>
     <tbody>
       <div class="column" #column>hey</div>
-      <tr>
-        <td>
-            <span>Color</span>
+      <tr *ngFor="let i of newstate">
+        <td (click)="onSelect(i)" [ngClass]="i.isselect ? 'click' : 'none'">
+            <span>{{ i.year }}</span>
         </td>
-        <td>
-            <span>Color</span>
+        <td (click)="onSelect(i)" [ngClass]="i.isselect ? 'click' : 'none'">
+            <span>{{ i.model }}</span>
         </td>
-        <td>
-            <span>Color</span>
+        <td (click)="onSelect(i)" [ngClass]="i.isselect ? 'click' : 'none'">
+            <span>{{ i.color }}</span>
         </td>
       </tr>
-      <tr>
-          <td>
-              <span>Color</span>
-          </td>
-          <td>
-              <span>Color</span>
-          </td>
-          <td>
-              <span>Color</span>
-          </td>
-        </tr>
-        <tr>
-            <td>
-                <span>Color</span>
-            </td>
-            <td>
-                <span>Color</span>
-            </td>
-            <td>
-                <span>Color</span>
-            </td>
-          </tr>
-          <tr>
-              <td>
-                  <span>Color</span>
-              </td>
-              <td>
-                  <span>Color</span>
-              </td>
-              <td>
-                  <span>Color</span>
-              </td>
-            </tr>
     </tbody>
   </table>
+  <button (click)="onAdd()">Add</button>
 </div>

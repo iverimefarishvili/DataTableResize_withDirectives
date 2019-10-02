@@ -1,14 +1,72 @@
-import { Component, HostListener, ViewChildren, QueryList, ElementRef, Renderer2 } from '@angular/core';
-
+import { Component, HostListener, ViewChildren, QueryList, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { Model} from './model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+
+
+
+export class AppComponent implements OnInit{
+  ngOnInit() {
+    this.newstate = this.state;
+  }
+  
+  newstate: any;
+  state = [
+    {
+      year:1991,
+      model:'Volkswagen',
+      color: 'Blue'
+    },
+    {
+      year: 1992,
+      model:'Audi',
+      color:'Red'
+    },
+    {
+      year:1993,
+      model:'Volvo',
+      color:'Yellow'
+    },
+    {
+      year:1995,
+      model:'Renault',
+      color:'Brown'
+    },
+    {
+      year: 1999,
+      model:'Jaguar',
+      color: 'Brown'
+    },
+    {
+      year: 1990,
+      model: 'Renault',
+      color: 'Brown'
+    },
+    {
+      year: 1965,
+      model: 'Mercedes',
+      color:'Brown'
+    },
+    {
+      year:1965,
+      model: 'Mercedes',
+      color: 'Brown'
+    },
+    {
+      year:1993,
+      model: 'Mercedes',
+      color: 'Brown'
+    }
+  ]
+  
   mouseStart = 0;
   mouseEnd = 0;
   isactive = false;
+  isselect = false;
+
 
   @ViewChildren('column')
   column: QueryList<ElementRef>;
@@ -35,7 +93,7 @@ export class AppComponent {
       this.renderer.setStyle(
         th.nativeElement, 
         'left', 
-        `${e.x-100}px`
+        `${e.x-120}px`
       );
     });
 
@@ -70,9 +128,6 @@ export class AppComponent {
 
   
 
-  ngOnInit(): void {
-    
-  }
   mai:any;
   el1size:any;
   el2size:any;
@@ -91,8 +146,7 @@ export class AppComponent {
     this.el1size = (this.el1.map(th => th.nativeElement.offsetWidth)[0]/this.mai)*100;
     this.el2size = (this.el2.map(th => th.nativeElement.offsetWidth)[0]/this.mai)*100;
     this.el3size = (this.el3.map(th => th.nativeElement.offsetWidth)[0]/this.mai)*100;
-    console.log(this.el1.map(th => th.nativeElement.offsetWidth)[0]);
-    console.log(this.el2.map(th => th.nativeElement.offsetWidth)[0]);
+    
 
     
     if(this.isactive) {
@@ -166,4 +220,96 @@ export class AppComponent {
       }
     }
   }
+
+
+
+  onAdd() {
+    this.state.push(
+      {
+        year:1993,
+        model: 'Mercedes',
+        color: 'Brown'
+      }
+    )
+  }
+  last: any;
+  num = 1;
+  onSelect(element) {
+    if(this.num!=1 && this.last!=element) {
+      this.last.isselect = false;
+    }
+    this.num++ 
+    
+    element.isselect = !element.isselect;
+    this.last = element;
+  }
+
+  issort = false;
+
+  sortbyyear(el) {
+    console.log(el.issort);
+    if(el.issort) {
+      
+      console.log("es")
+      el.issort = !el.issort;
+      this.newstate = this.state.sort((a,b) => {
+        if(a.year>b.year){
+          return 1;
+        }
+        if(a.year<b.year) {
+          return -1;
+        }
+        return 0;
+      })
+    }else{
+      console.log("meore")
+      this.newstate = this.state.sort((a,b) => {
+        if(a.year<b.year){
+          return 1;
+        }
+        if(a.year>b.year) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+    console.log(el.issort)
+    el.issort = !el.issort;
+
+    
+  }
+
+  sortbymodel(el) {
+    el.issort = !el.issort;
+      this.newstate = this.state.sort((a,b) => {
+        const e1 = a.model.toLowerCase();
+        const e2 = b.model.toLowerCase();
+        if(e1>e2){
+          return 1;
+        }
+        if(e1<e2) {
+          return -1;
+        }
+        return 0;
+      })
+      
+  }
+    
+  
+  sortbycolor(el) {
+    el.issort = !el.issort;
+      this.newstate = this.state.sort((a,b) => {
+        const e1 = a.color.toLowerCase();
+        const e2 = b.color.toLowerCase();
+        if(e1>e2){
+          return 1;
+        }
+        if(e1<e2) {
+          return -1;
+        }
+        return 0;
+      })
+      
+  }
+
 }
