@@ -247,11 +247,11 @@ export class AppComponent implements OnInit{
   issort = false;
 
   sortbyyear(el) {
-    console.log(el.issort);
-    if(el.issort) {
+    el.issort = !el.issort;
+    
       
-      console.log("es")
-      el.issort = !el.issort;
+      
+      if(el.issort){
       this.newstate = this.state.sort((a,b) => {
         if(a.year>b.year){
           return 1;
@@ -261,8 +261,7 @@ export class AppComponent implements OnInit{
         }
         return 0;
       })
-    }else{
-      console.log("meore")
+    }else {
       this.newstate = this.state.sort((a,b) => {
         if(a.year<b.year){
           return 1;
@@ -273,14 +272,15 @@ export class AppComponent implements OnInit{
         return 0;
       })
     }
-    console.log(el.issort)
-    el.issort = !el.issort;
+  }
+    
 
     
-  }
+  
 
   sortbymodel(el) {
     el.issort = !el.issort;
+    if(el.issort) {
       this.newstate = this.state.sort((a,b) => {
         const e1 = a.model.toLowerCase();
         const e2 = b.model.toLowerCase();
@@ -292,12 +292,27 @@ export class AppComponent implements OnInit{
         }
         return 0;
       })
+    }else {
+      this.newstate = this.state.sort((a,b) => {
+        const e1 = a.model.toLowerCase();
+        const e2 = b.model.toLowerCase();
+        if(e1<e2){
+          return 1;
+        }
+        if(e1>e2) {
+          return -1;
+        }
+        return 0;
+      })
+    }
+      
       
   }
     
   
   sortbycolor(el) {
     el.issort = !el.issort;
+    if(el.issort){
       this.newstate = this.state.sort((a,b) => {
         const e1 = a.color.toLowerCase();
         const e2 = b.color.toLowerCase();
@@ -309,7 +324,19 @@ export class AppComponent implements OnInit{
         }
         return 0;
       })
-      
+    }else {
+      this.newstate = this.state.sort((a,b) => {
+        const e1 = a.color.toLowerCase();
+        const e2 = b.color.toLowerCase();
+        if(e1<e2){
+          return 1;
+        }
+        if(e1>e2) {
+          return -1;
+        }
+        return 0;
+      })
+    }
   }
 
 }
