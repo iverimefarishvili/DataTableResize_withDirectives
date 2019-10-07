@@ -1,5 +1,6 @@
 import { Component, HostListener, ViewChildren, QueryList, ElementRef, Renderer2, OnInit } from '@angular/core';
 import { Model} from './model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,46 +17,55 @@ export class AppComponent implements OnInit{
   newstate: any;
   state = [
     {
+      index: 0,
       year:1991,
       model:'Volkswagen',
       color: 'Blue'
     },
     {
+      index: 1,
       year: 1992,
       model:'Audi',
       color:'Red'
     },
     {
+      index: 2,
       year:1993,
       model:'Volvo',
       color:'Yellow'
     },
     {
+      index: 3,
       year:1995,
       model:'Renault',
       color:'Brown'
     },
     {
+      index: 4,
       year: 1999,
       model:'Jaguar',
       color: 'Brown'
     },
     {
+      index: 5,
       year: 1990,
       model: 'Renault',
       color: 'Brown'
     },
     {
+      index: 6,
       year: 1965,
       model: 'Mercedes',
       color:'Brown'
     },
     {
+      index: 7,
       year:1965,
       model: 'Mercedes',
       color: 'Brown'
     },
     {
+      index:8,
       year:1993,
       model: 'Mercedes',
       color: 'Brown'
@@ -67,6 +77,8 @@ export class AppComponent implements OnInit{
   isactive = false;
   isselect = false;
 
+  @ViewChildren('body')
+  body: QueryList<ElementRef>;
 
   @ViewChildren('column')
   column: QueryList<ElementRef>;
@@ -84,6 +96,7 @@ export class AppComponent implements OnInit{
   el3: QueryList<ElementRef>;
   
   constructor(private renderer: Renderer2) {};
+
 
   @HostListener('document:mousemove', ['$event'])
   onMouseMove(e) {
@@ -221,11 +234,12 @@ export class AppComponent implements OnInit{
     }
   }
 
-
+  length = this.state.length;
 
   onAdd() {
     this.state.push(
       {
+        index: this.length ++,
         year:1993,
         model: 'Mercedes',
         color: 'Brown'
@@ -234,7 +248,20 @@ export class AppComponent implements OnInit{
   }
   last: any;
   num = 1;
+
+  @HostListener('document:keydown', ['$event'])
+  @HostListener('document:keyup', ['$event'])
+  
+  onkeypress(event) {
+    if(event.key == 'Control') {
+      while(event.ctrlKey == true) {
+        console.log("ragac")
+      }
+    }
+  }
+  
   onSelect(element) {
+    
     if(this.num!=1 && this.last!=element) {
       this.last.isselect = false;
     }
@@ -336,6 +363,65 @@ export class AppComponent implements OnInit{
         }
         return 0;
       })
+    }
+  }
+
+  move = false;
+  movement = undefined;
+  elem = undefined;
+  starty: number;
+  endy:number;
+  currentindex:number;
+  onmove(event, element) {
+    this.starty = event.y;
+    this.move = true;
+    this.body.map(el => {
+      this.elem = el.nativeElement.children[element.index+1]
+      this.currentindex = element.index;
+    })
+    this.elem.style.position = 'absolute'
+    this.elem.style.width = '100 %'
+    
+    
+  }
+
+  moved(event, element) {
+    
+    //this.array_move(this.state, this.currentindex , Math.round(event.y-this.starty)/26);
+    //console.log(this.elem.index, Math.round((event.y-this.starty)/26))
+    //console.log(this.currentindex)
+    this.elem.style = 'inline-block'
+    this.array_move(this.state, this.currentindex , element.index);
+    this.move = false;
+    
+  }
+
+
+
+  array_move(arr, old_index, new_index) {
+    new_index =((new_index % arr.length) + arr.length) % arr.length;
+    arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    return arr;
+  }
+
+
+
+  
+  @HostListener('document:mousemove', ['$event'])
+  MouseMove(element) {
+    this.movement = element.y;
+    if(this.move == true) {
+      //this.elem.style.top = element.y;
+      //console.log(element.y)
+      //this.elem.forEach((th, index) => {
+        this.renderer.setStyle(
+          this.elem, 
+          'top', 
+          `${element.y-70}px`
+        );
+      //}); 
+      
+      //console.log(element.y)
     }
   }
 

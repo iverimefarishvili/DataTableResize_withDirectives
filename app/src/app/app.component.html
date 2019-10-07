@@ -25,9 +25,9 @@
         
       </tr>
     </thead>
-    <tbody>
+    <tbody #body style="position: relative; height: 100%; width: 500px;">
       <div class="column" #column>hey</div>
-      <tr *ngFor="let i of newstate">
+      <tr *ngFor="let i of newstate" (mousedown)="onmove($event, i)" (mouseup)="moved($event,i)">
         <td (click)="onSelect(i)" [ngClass]="i.isselect ? 'click' : 'none'">
             <span>{{ i.year }}</span>
         </td>
