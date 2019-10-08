@@ -400,7 +400,7 @@ export class AppComponent implements OnInit{
 
 
   array_move(arr, old_index, new_index) {
-    new_index =((new_index % arr.length) + arr.length) % arr.length;
+    new_index =(new_index % arr.length);
     arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
     let i = 0;
     arr.map(el => {
@@ -416,7 +416,7 @@ export class AppComponent implements OnInit{
   @HostListener('document:mousemove', ['$event'])
   MouseMove(element) {
     this.movement = element.y;
-    if(this.move == true) {
+    if(this.move) {
       //this.elem.style.top = element.y;
       //console.log(element.y)
       //this.elem.forEach((th, index) => {
