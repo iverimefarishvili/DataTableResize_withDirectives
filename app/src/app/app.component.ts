@@ -392,6 +392,7 @@ export class AppComponent implements OnInit{
     //console.log(this.currentindex)
     this.elem.style = 'inline-block'
     this.array_move(this.state, this.currentindex , element.index);
+    console.log(element.index)
     this.move = false;
     
   }
@@ -401,6 +402,11 @@ export class AppComponent implements OnInit{
   array_move(arr, old_index, new_index) {
     new_index =((new_index % arr.length) + arr.length) % arr.length;
     arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
+    let i = 0;
+    arr.map(el => {
+      el.index = i++;
+    })
+    console.log(arr)
     return arr;
   }
 
